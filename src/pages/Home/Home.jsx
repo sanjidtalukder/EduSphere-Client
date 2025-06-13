@@ -7,19 +7,15 @@ const Home = () => {
 
   // Fetch articles on component mount
   useEffect(() => {
-    fetch("http://localhost:5000/articles")
-      .then((res) => res.json())
-      .then((data) => {
-        setArticles(data);
+  fetch("http://localhost:5000/articles/featured")
+    .then(res => res.json())
+    .then(data => {
+      setArticles(data);
+      const cats = [...new Set(data.map((item) => item.category))];
+      setCategories(cats);
+    });
+}, []);
 
-        // Extract unique categories from articles
-        const cats = [...new Set(data.map((item) => item.category))];
-        setCategories(cats);
-      })
-      .catch((err) => {
-        console.error("Error fetching articles:", err);
-      });
-  }, []);
 
   return (
     <div className="px-4 md:px-12 space-y-16">

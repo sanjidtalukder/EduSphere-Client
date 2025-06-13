@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 const AllArticels = () => {
   const [articles, setArticles] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:5000/articles") // ✅ তোমার API URL
-      .then(res => res.json())
-      .then(data => setArticles(data))
-      .catch(err => console.error(err));
-  }, []);
+ useEffect(() => {
+  fetch("http://localhost:5000/articles")
+    .then(res => res.json())
+    .then(data => setArticles(data));
+}, []);
+
 
   return (
     <div className="px-4 md:px-12 py-10 bg-gray-50 min-h-screen">
