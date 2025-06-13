@@ -1,7 +1,6 @@
 import { createContext, useEffect, useState } from "react";
-import { auth } from "../firebase/firebase.config";
+import { app, auth } from "../firebase/firebase.config";
 import { getAuth, updateProfile } from "firebase/auth";
-
 import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -9,13 +8,14 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
-  
 } from "firebase/auth";
 
-export const AuthContext = createContext();
+export const AuthContext = createContext(null);
+
+// 🔵 নিচের লাইনটি ছিল, সেটা মুছে ফেলা হয়েছে:
+// const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();
-// export const auth = getAuth();
 
 const updateUserProfile = async ({ displayName, photoURL }) => {
   if (auth.currentUser) {
@@ -62,9 +62,14 @@ const AuthProvider = ({ children }) => {
     signIn,
     signInWithGoogle,
     logOut,
+    updateUserProfile,
   };
 
-  return <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={authInfo}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

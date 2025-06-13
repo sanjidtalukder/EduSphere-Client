@@ -2,7 +2,9 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
+import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
+import { auth } from "../../firebase/firebase.config";
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -26,6 +28,10 @@ const Register = () => {
     try {
       await createUser(email, password);
       await updateUserProfile({ displayName: name, photoURL: photo });
+      await updateProfile(auth.currentUser, {
+    displayName: name,
+    photoURL: imageURL,
+});
      
 
       toast.success("Registration successful!");

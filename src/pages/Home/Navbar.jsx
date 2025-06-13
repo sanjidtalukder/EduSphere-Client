@@ -42,7 +42,7 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        to="/articles"
+        to="/AllArticles"
         className={({ isActive }) =>
           `px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
             isActive ? 'font-bold underline' : ''
@@ -64,7 +64,7 @@ const Navbar = () => {
             My Articles
           </NavLink>
           <NavLink
-            to="/post"
+            to="/post-articles"
             className={({ isActive }) =>
               `px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
                 isActive ? 'font-bold underline' : ''
@@ -76,7 +76,7 @@ const Navbar = () => {
         </>
       )}
       <NavLink
-        to="/about"
+        to="/aboutUs"
         className={({ isActive }) =>
           `px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
             isActive ? 'font-bold underline' : ''
@@ -120,11 +120,12 @@ const Navbar = () => {
               onMouseEnter={() => setDropdownOpen(true)}
               onMouseLeave={() => setDropdownOpen(false)}
             >
-              <img
-                src={user.photoURL || '/default-avatar.png'}
-                alt="profile"
-                className="w-10 h-10 rounded-full cursor-pointer border-2 border-blue-500"
-              />
+             <img
+  src={user?.photoURL || '/default-avatar.png'}
+  alt="profile"
+  className="w-10 h-10 rounded-full cursor-pointer border-2 border-blue-500"
+/>
+
               {dropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border dark:border-gray-700 rounded-md shadow-lg z-50">
                   <NavLink
