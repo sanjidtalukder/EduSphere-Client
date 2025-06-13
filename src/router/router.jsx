@@ -11,6 +11,7 @@ import MyArticels from "../components/MyArticels";
 import PostArticles from "../components/PostArticles";
 import AboutUs from "../components/AboutUs";
 import ArticlesByCategory from "../pages/ArticlesByCategory";
+import NotFound from "../pages/NotFound";
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
       {
         path:"/articles/category/:category",
         element: <ArticlesByCategory></ArticlesByCategory>,
+      },
+      {
+        path: "*",
+        element: <NotFound />,
       },
       {
         path: "footer",
