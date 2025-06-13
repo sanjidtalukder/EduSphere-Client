@@ -35,31 +35,45 @@ const Home = () => {
 
       </section>
 
-      {/* Featured Articles */}
-      <section>
-        <h2 className="text-2xl font-semibold mb-6">📚 Featured Articles</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          {articles.map((article) => (
-            <div key={article._id} className="bg-white p-5 shadow-md rounded-xl">
-              <h3 className="text-xl font-semibold">{article.title}</h3>
-              <p className="text-sm text-gray-600 my-2">
-                {article.content?.slice(0, 80)}...
-              </p>
-              <div className="flex items-center gap-2 mt-4">
-                <img
-                  src={article.author_photo}
-                  alt={article.author_name}
-                  className="w-10 h-10 rounded-full"
-                />
-                <div>
-                  <p className="font-medium">{article.author_name}</p>
-                  <p className="text-xs text-gray-500">{article.category}</p>
-                </div>
-              </div>
-            </div>
-          ))}
+     {/* Featured Articles */}
+<section className="my-10">
+  <h2 className="text-2xl font-semibold mb-6">📚 Featured Articles</h2>
+  <div className="grid md:grid-cols-3 gap-6">
+    {articles.map((article) => (
+      <div key={article._id} className="bg-white p-5 shadow-md rounded-xl flex flex-col justify-between">
+        <div>
+          <h3 className="text-xl font-semibold text-blue-800">{article.title}</h3>
+          <p className="text-sm text-gray-600 my-2">
+            {article.content?.slice(0, 80)}...
+          </p>
         </div>
-      </section>
+
+        <div className="flex items-center gap-2 mt-4">
+          <img
+            src={article.author_photo}
+            alt={article.author_name}
+            className="w-10 h-10 rounded-full"
+          />
+          <div>
+            <p className="font-medium">{article.author_name}</p>
+            <p className="text-xs text-gray-500">{article.category}</p>
+          </div>
+        </div>
+
+        {/* Read More Button */}
+        <div className="mt-4">
+          <a
+            href={`/articles/${article._id}`}
+            className="inline-block mt-2 text-sm text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full transition duration-300"
+          >
+            Read More →
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
 
       {/* Categories */}
 <section>
