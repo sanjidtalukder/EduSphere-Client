@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TopContributors from "../../components/TopContributors";
+// import { Link } from "react-router-dom";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -27,7 +28,7 @@ const Home = () => {
         <p className="text-lg text-gray-600 mb-6">
           Discover insightful articles from various domains and share yours too!
         </p>
-       <Link to="/AllArticles">
+       <Link to="/all-articles">
   <button className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-6 rounded-full font-semibold transition">
     Explore Articles
   </button>
@@ -61,14 +62,17 @@ const Home = () => {
         </div>
 
         {/* Read More Button */}
-        <div className="mt-4">
-          <a
-            href={`/articles/${article._id}`}
-            className="inline-block mt-2 text-sm text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full transition duration-300"
-          >
-            Read More →
-          </a>
-        </div>
+      
+
+<div className="mt-4">
+  <Link
+    to={`/articles/${article._id}`}
+    className="inline-block mt-2 text-sm text-white bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-full transition duration-300"
+  >
+    Read More →
+  </Link>
+</div>
+
       </div>
     ))}
   </div>

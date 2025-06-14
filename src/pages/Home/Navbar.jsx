@@ -42,7 +42,7 @@ const Navbar = () => {
         Home
       </NavLink>
       <NavLink
-        to="/AllArticles"
+        to="/all-articles"
         className={({ isActive }) =>
           `px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
             isActive ? 'font-bold underline' : ''
@@ -76,7 +76,7 @@ const Navbar = () => {
         </>
       )}
       <NavLink
-        to="/aboutUs"
+        to="/about-us"
         className={({ isActive }) =>
           `px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
             isActive ? 'font-bold underline' : ''
