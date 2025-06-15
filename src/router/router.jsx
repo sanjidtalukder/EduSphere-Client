@@ -10,6 +10,8 @@ import AboutUs from "../components/AboutUs";
 import ArticlesByCategory from "../pages/ArticlesByCategory";
 import NotFound from "../pages/NotFound";
 import ArticleDetails from "../pages/ArticleDetails";
+import FaqSection from "../components/FaqSection";
+import ContactUs from "../components/ContactUs";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +53,14 @@ const router = createBrowserRouter([
       {
         path: "articles/:id",
         element: <ArticleDetails />,
+      },
+      {
+        path: "feqSection",
+        element: <FaqSection />,
+      },
+      {
+        path: "contactUs",
+        element: <ContactUs />,
       },
       {
         path: "*",

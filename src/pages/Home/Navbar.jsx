@@ -85,6 +85,26 @@ const Navbar = () => {
       >
         About Us
       </NavLink>
+      <NavLink
+        to="/contactUs"
+        className={({ isActive }) =>
+          `px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
+            isActive ? 'font-bold underline' : ''
+          }`
+        }
+      >
+        Contact Us
+      </NavLink>
+       <NavLink
+        to="/feqSection"
+        className={({ isActive }) =>
+          `px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
+            isActive ? 'font-bold underline' : ''
+          }`
+        }
+      >
+        Questions & Quary
+      </NavLink>
     </>
   );
 
