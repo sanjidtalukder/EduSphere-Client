@@ -1,8 +1,10 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider"; 
 
 const ArticleDetails = () => {
   const { id } = useParams();
+  const { user, loading: authLoading } = useContext(AuthContext); //  Firebase user
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -13,13 +15,7 @@ const ArticleDetails = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  const currentUser = {
-    id: "660efc1a4f5a6c0032d7b981",
-    name: "Kuroo Tetsurō",
-    photo: "https://example.com/photos/kuroo.jpg",
-  };
-
-  // Article Load
+  //  Article Load
   useEffect(() => {
     setLoading(true);
     fetch(`http://localhost:5000/articles/${id}`)
@@ -29,7 +25,6 @@ const ArticleDetails = () => {
       })
       .then((data) => {
         setArticle(data);
-        setLikes(data.likes || 0);
         setLoading(false);
       })
       .catch((err) => {
@@ -38,7 +33,38 @@ const ArticleDetails = () => {
       });
   }, [id]);
 
-  // Load comments for this article
+  //  Likes Load & Check if already liked
+  useEffect(() => {
+    if (!user?.email) return;
+    fetch(`http://localhost:5000/articles/${id}/likes`)
+      .then((res) => res.json())
+      .then(({ totalLikes }) => {
+        setLikes(totalLikes);
+      });
+
+    // Check if user already liked
+    fetch(`http://localhost:5000/articles/${id}`)
+      .then(res => res.json())
+      .then(data => {
+        fetch(`http://localhost:5000/articles/${id}/likes`)
+          .then(res => res.json())
+          .then(({ totalLikes }) => {
+            setLikes(totalLikes);
+            console.log(data)
+          });
+
+        fetch(`http://localhost:5000/articles/${id}/likes`)
+          .then(res => res.json())
+          .then(({ likedBy }) => {
+            if (likedBy?.includes(user?.email)) {
+              setLiked(true);
+            }
+          });
+      })
+      .catch((err) => console.error("Like check error:", err));
+  }, [id, user]);
+
+  //  Comments Load
   useEffect(() => {
     fetch(`http://localhost:5000/articles/${id}/comments`)
       .then((res) => res.json())
@@ -46,28 +72,40 @@ const ArticleDetails = () => {
       .catch((err) => console.error("Failed to load comments:", err));
   }, [id]);
 
-  // Like button
+  //  Like
   const handleLike = () => {
+    if (!user?.email) {
+      return alert("Please login to like this article.");
+    }
+
     fetch(`http://localhost:5000/articles/${id}/like`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: user.email }),
     })
       .then((res) => res.json())
       .then((data) => {
-        setLikes(data.likes);
-        setLiked(data.userLiked);
+        if (data.success) {
+          setLikes(data.likes);
+          setLiked(true);
+        } else {
+          alert(data.message);
+        }
       })
       .catch((err) => console.error("Like error:", err));
   };
 
-  // Add new comment
+  // Comment
   const handleAddComment = () => {
+    if (!user?.email) {
+      return alert("Please login to comment.");
+    }
     if (!newComment.trim()) return;
 
     const commentData = {
-      user_id: currentUser.id,
-      user_name: currentUser.name,
-      user_photo: currentUser.photo,
+      user_id: user.uid,
+      user_name: user.displayName || "Anonymous",
+      user_photo: user.photoURL || "",
       comment: newComment.trim(),
     };
 
@@ -84,13 +122,8 @@ const ArticleDetails = () => {
       .catch((err) => console.error("Failed to add comment:", err));
   };
 
-  if (loading) return <p className="text-center mt-10">Loading article...</p>;
-  if (error)
-    return (
-      <p className="text-center mt-10 text-red-500">
-        Error: {error}
-      </p>
-    );
+  if (loading || authLoading) return <p className="text-center mt-10">Loading article...</p>;
+  if (error) return <p className="text-center mt-10 text-red-500">Error: {error}</p>;
 
   return (
     <div className="px-4 md:px-10 py-12 bg-white min-h-screen max-w-5xl mx-auto shadow-lg rounded-xl">
@@ -102,15 +135,9 @@ const ArticleDetails = () => {
           className="w-36 h-36 md:w-48 md:h-48 rounded-full object-cover border-4 border-blue-600 shadow-md"
         />
         <div className="text-center md:text-left">
-          <h1 className="text-4xl font-bold text-blue-900 mb-2">
-            {article?.title}
-          </h1>
-          <p className="font-semibold text-gray-800 text-xl">
-            {article?.author_name}
-          </p>
-          <p className="font-semibold text-gray-800 text-xl">
-            {article?.category}
-          </p>
+          <h1 className="text-4xl font-bold text-blue-900 mb-2">{article?.title}</h1>
+          <p className="font-semibold text-gray-800 text-xl">{article?.author_name}</p>
+          <p className="font-semibold text-gray-800 text-xl">{article?.category}</p>
           {article?.date && (
             <p className="text-sm text-gray-500 mt-1">
               {new Date(article.date).toLocaleDateString("en-GB", {
@@ -123,7 +150,7 @@ const ArticleDetails = () => {
         </div>
       </div>
 
-      {/* Article Content */}
+      {/* Content */}
       <article className="text-gray-700 text-lg leading-relaxed whitespace-pre-line tracking-wide">
         {article?.content}
       </article>
@@ -142,10 +169,11 @@ const ArticleDetails = () => {
         </div>
       )}
 
-      {/* Like Section */}
+      {/* Like */}
       <div className="my-6 flex items-center gap-4">
         <button
           onClick={handleLike}
+          disabled={liked}
           className={`px-4 py-2 rounded-full ${
             liked ? "bg-blue-600 text-white" : "bg-gray-300 text-gray-700"
           }`}
@@ -157,13 +185,12 @@ const ArticleDetails = () => {
         </span>
       </div>
 
-      {/* Comment Section */}
+      {/* Comments */}
       <div className="mt-8">
         <h2 className="text-2xl font-semibold mb-4">
           Comments ({comments.length})
         </h2>
 
-        {/* Comment List */}
         <div className="max-h-60 overflow-y-auto space-y-4 mb-4">
           {comments.length === 0 && <p>No comments yet. Be the first!</p>}
           {comments.map((c) => (
@@ -181,7 +208,6 @@ const ArticleDetails = () => {
           ))}
         </div>
 
-        {/* Add Comment */}
         <textarea
           rows="3"
           className="w-full p-2 border rounded-md"
