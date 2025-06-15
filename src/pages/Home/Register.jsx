@@ -1,10 +1,11 @@
-// src/pages/Register.jsx
 import { useContext, useState } from "react";
 import { AuthContext } from "../../providers/AuthProvider";
 import { Link, useNavigate } from "react-router-dom";
 import { updateProfile } from "firebase/auth";
 import toast from "react-hot-toast";
 import { auth } from "../../firebase/firebase.config";
+import Lottie from "lottie-react";
+import registerAnimation from "../../assets/register-lottie.json"; // লোকালি রাখলে
 
 const Register = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
@@ -43,8 +44,14 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 to-blue-200 p-4">
-      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
+    <div className="min-h-screen flex flex-col md:flex-row items-center justify-center bg-gradient-to-r from-purple-100 to-blue-200 p-6">
+      {/* Lottie Animation */}
+      <div className="hidden md:block md:w-1/2">
+        <Lottie animationData={registerAnimation} loop={true} />
+      </div>
+
+      {/* Registration Form */}
+      <div className="w-full md:w-1/2 max-w-md bg-white p-8 rounded-2xl shadow-2xl">
         <h2 className="text-3xl font-bold text-center text-purple-700 mb-2">Create an Account</h2>
         <p className="text-center text-gray-600 mb-6">Join EduSphere today!</p>
 
