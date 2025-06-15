@@ -28,11 +28,11 @@ const Register = () => {
     try {
       await createUser(email, password);
       await updateUserProfile({ displayName: name, photoURL: photo });
+
       await updateProfile(auth.currentUser, {
-    displayName: name,
-    photoURL: imageURL,
-});
-     
+        displayName: name,
+        photoURL: photo,
+      });
 
       toast.success("Registration successful!");
       navigate("/");
@@ -43,19 +43,56 @@ const Register = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-6 shadow-xl rounded-xl mt-10 bg-white">
-      <h2 className="text-2xl font-bold text-center mb-4">Register</h2>
-      <form onSubmit={handleRegister} className="space-y-4">
-        <input type="text" name="name" placeholder="Name" required className="w-full p-2 border rounded" />
-        <input type="text" name="photo" placeholder="Photo URL" className="w-full p-2 border rounded" />
-        <input type="email" name="email" placeholder="Email" required className="w-full p-2 border rounded" />
-        <input type="password" name="password" placeholder="Password" required className="w-full p-2 border rounded" />
-        {error && <p className="text-red-500 text-sm">{error}</p>}
-        <button className="w-full bg-green-600 text-white p-2 rounded">Register</button>
-      </form>
-      <p className="mt-4 text-center">
-        Already have an account? <Link to="/login" className="text-blue-600">Login here</Link>
-      </p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-purple-100 to-blue-200 p-4">
+      <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-2xl">
+        <h2 className="text-3xl font-bold text-center text-purple-700 mb-2">Create an Account</h2>
+        <p className="text-center text-gray-600 mb-6">Join EduSphere today!</p>
+
+        <form onSubmit={handleRegister} className="space-y-4">
+          <input
+            type="text"
+            name="name"
+            placeholder="Full Name"
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+          <input
+            type="text"
+            name="photo"
+            placeholder="Photo URL"
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+          <input
+            type="email"
+            name="email"
+            placeholder="Email Address"
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+          />
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+
+          <button
+            type="submit"
+            className="w-full bg-purple-600 text-white p-3 rounded-md hover:bg-purple-700 transition"
+          >
+            Register
+          </button>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-gray-700">
+          Already have an account?{" "}
+          <Link to="/login" className="text-purple-600 hover:underline">
+            Login here
+          </Link>
+        </p>
+      </div>
     </div>
   );
 };

@@ -30,7 +30,7 @@ const Login = () => {
     try {
       await signInWithGoogle();
       toast.success("Logged in with Google!");
-      navigate("/");
+      navigate("/home");
     } catch (error) {
       toast.error("Google login failed.");
     }
