@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const AboutUs = () => {
   return (
@@ -82,8 +83,19 @@ const AboutUs = () => {
               href="mailto:contact@edusphere.com"
               className="text-indigo-500 underline font-medium"
             >
-              contact@edusphere.com
+              edusphere@gmail.com
             </a>
+          </p>
+
+          {/* Link to Contact Us Page */}
+          <p className="mt-3">
+            Or you can also fill out our{" "}
+            <Link
+              to="/contact-us"
+              className="text-blue-600 font-semibold underline hover:text-blue-800 transition"
+            >
+              Contact Form
+            </Link>
           </p>
         </div>
       </div>

@@ -22,8 +22,8 @@ const Footer = () => {
           <h3 className="text-lg font-semibold mb-4 text-gray-700 dark:text-gray-300">Quick Links</h3>
           <div className="flex flex-col gap-2 text-sm">
             <Link to="/about-us" className="hover:text-blue-600 transition">About Us</Link>
-            <Link to="/contactUs" className="hover:text-blue-600 transition">Contact Us</Link>
-            <Link to="/feqSection" className="hover:text-blue-600 transition">Question & Query</Link>
+            <Link to="/contact-us" className="hover:text-blue-600 transition">Contact Us</Link>
+            <Link to="/faq-section" className="hover:text-blue-600 transition">Question & Query</Link>
           </div>
         </div>
 

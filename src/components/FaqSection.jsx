@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const faqs = [
   {
@@ -71,17 +72,20 @@ const FaqSection = () => {
       </div>
 
       {/* Call to Action */}
-      <div className="mt-16 text-center">
-        <p className="text-lg text-gray-700 mb-4">
-          Still have questions? We're here to help!
-        </p>
-        <a
-          href="mailto:contact@edusphere.com"
-          className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-indigo-700 transition"
-        >
-          Contact Us
-        </a>
-      </div>
+     
+
+<div className="mt-16 text-center">
+  <p className="text-lg text-gray-700 mb-4">
+    Still have questions? We're here to help!
+  </p>
+  <Link
+    to="/contact-us"
+    className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-indigo-700 transition"
+  >
+    Contact Us
+  </Link>
+</div>
+
     </div>
   );
 };
