@@ -12,7 +12,7 @@ import {
 
 export const AuthContext = createContext(null);
 
-// 🔵 নিচের লাইনটি ছিল, সেটা মুছে ফেলা হয়েছে:
+
 // const auth = getAuth(app);
 
 const googleProvider = new GoogleAuthProvider();
