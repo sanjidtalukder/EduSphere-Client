@@ -34,7 +34,7 @@ const AllArticels = () => {
 
               <div className="flex items-center gap-3 mt-auto">
                 <img
-                  src={article.author_photo}
+                  src={article.thumbnail}
                   alt={article.author_name}
                   className="w-12 h-12 rounded-full object-cover border"
                 />

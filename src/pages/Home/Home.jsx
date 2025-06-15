@@ -51,7 +51,7 @@ const Home = () => {
 
         <div className="flex items-center gap-2 mt-4">
           <img
-            src={article.author_photo}
+            src={article.thumbnail}
             alt={article.author_name}
             className="w-10 h-10 rounded-full"
           />
