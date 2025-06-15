@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import BackgroundWrapper from "./BackgroundWrapper";
+import Lottie from "lottie-react";
+import homeBgAnimation from "../assets/home-bg-lottie.json";
 
 const AllArticels = () => {
   const [articles, setArticles] = useState([]);
@@ -14,6 +16,13 @@ const AllArticels = () => {
   return (
     <BackgroundWrapper>
       <div className="px-4 md:px-12 py-16 min-h-screen">
+         {/* 🔵 Animated Background */}
+              <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
+                <Lottie animationData={homeBgAnimation} loop={true} />
+              </div>
+        
+              {/* Main Content */}
+              <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
         {/* Page Title */}
         <h2 className="text-4xl font-bold text-center text-blue-900 mb-12 drop-shadow-sm">
           📚 Explore All Articles

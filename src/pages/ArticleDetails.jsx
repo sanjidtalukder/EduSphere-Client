@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
+import BackgroundWrapper from "../components/BackgroundWrapper";
 
 const ArticleDetails = () => {
   const { id } = useParams();
@@ -99,8 +100,9 @@ const ArticleDetails = () => {
     return <p className="text-center mt-10 text-red-500">Error: {error}</p>;
 
   return (
-    <div className="flex justify-center py-12 px-4">
-      <div className="card w-full md:w-[800px] bg-base-100 shadow-lg">
+    <BackgroundWrapper>
+<div className="flex justify-center py-12 px-4">
+      <div className="card w-full md:w-[800px] shadow-lg">
         <figure>
           <img
             src={article?.thumbnail || "https://via.placeholder.com/600x300"}
@@ -182,6 +184,8 @@ const ArticleDetails = () => {
         </div>
       </div>
     </div>
+    </BackgroundWrapper>
+    
   );
 };
 

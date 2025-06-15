@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import TopContributors from "../../components/TopContributors";
 import Lottie from "lottie-react";
 import homeBgAnimation from "../../assets/home-bg-lottie.json"; // Lottie background animation
+import BackgroundWrapper from "../../components/BackgroundWrapper";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -19,7 +20,8 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen overflow-x-hidden">
+    <BackgroundWrapper>
+ <div className="relative min-h-screen overflow-x-hidden">
       {/* 🔵 Animated Background */}
       <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
         <Lottie animationData={homeBgAnimation} loop={true} />
@@ -111,6 +113,8 @@ const Home = () => {
         <TopContributors />
       </div>
     </div>
+    </BackgroundWrapper>
+   
   );
 };
 
