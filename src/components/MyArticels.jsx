@@ -3,6 +3,9 @@ import { AuthContext } from "../providers/AuthProvider";
 import axios from "axios";
 import toast from "react-hot-toast";
 import Modal from "react-modal";
+import BackgroundWrapper from "./BackgroundWrapper";
+import Lottie from "lottie-react";
+import homeBgAnimation from "../assets/home-bg-lottie.json";
 
 Modal.setAppElement("#root");
 
@@ -136,7 +139,16 @@ const MyArticles = () => {
   }
 
   return (
-    <div className="max-w-5xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-lg">
+    <BackgroundWrapper>
+<div className="max-w-5xl mx-auto mt-10 p-6 rounded-2xl shadow-lg">
+
+   {/* 🔵 Animated Background */}
+                <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
+                  <Lottie animationData={homeBgAnimation} loop={true} />
+                </div>
+          
+                {/* Main Content */}
+                <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
       <h2 className="text-4xl font-extrabold mb-8 text-center text-indigo-600 tracking-wide">📝 My Articles</h2>
 
       {articles.length === 0 ? (
@@ -267,6 +279,8 @@ const MyArticles = () => {
         </form>
       </Modal>
     </div>
+    </BackgroundWrapper>
+    
   );
 };
 

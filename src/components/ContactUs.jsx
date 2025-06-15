@@ -1,4 +1,8 @@
 import { useState } from "react";
+import BackgroundWrapper from "./BackgroundWrapper";
+import Lottie from "lottie-react";
+import homeBgAnimation from "../assets/home-bg-lottie.json";
+
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({
@@ -16,20 +20,30 @@ const ContactUs = () => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    // এখানে তুমি চাইলে API কল করতে পারো
-
+    // call the  API 
     setSuccess(true);
 
-    // ফর্ম রিসেট করতে চাইলে:
+    // resate the form
     setFormData({ name: "", email: "", message: "" });
 
-    // সফল মেসেজ ৫ সেকেন্ড পরে অদৃশ্য করতে চাইলে:
+    // all message will be deleted withen the 5
     setTimeout(() => setSuccess(false), 5000);
   };
 
   return (
-    <div className="max-w-3xl mx-auto p-6 bg-white dark:bg-gray-900 rounded-md shadow-md mt-10">
-      <h2 className="text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-200">Contact Us</h2>
+    <BackgroundWrapper>
+ <div className="max-w-3xl mx-auto p-6  rounded-md shadow-md mt-10">
+
+  
+           {/* 🔵 Animated Background */}
+                <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
+                  <Lottie animationData={homeBgAnimation} loop={true} />
+                </div>
+          
+                {/* Main Content */}
+                <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
+
+      <h2 className="text-3xl font-semibold mb-6 text-gray-800 dark:text-gray-700">Contact Us</h2>
 
       {success && (
         <div className="mb-6 p-4 bg-green-100 dark:bg-green-800 text-green-800 dark:text-green-200 rounded">
@@ -39,7 +53,7 @@ const ContactUs = () => {
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <label className="flex flex-col">
-          <span className="mb-1 text-gray-700 dark:text-gray-300 font-medium">Name</span>
+          <span className="mb-1 text-gray-700 dark:text-gray-600 font-medium">Name</span>
           <input
             type="text"
             name="name"
@@ -52,7 +66,7 @@ const ContactUs = () => {
         </label>
 
         <label className="flex flex-col">
-          <span className="mb-1 text-gray-700 dark:text-gray-300 font-medium">Email</span>
+          <span className="mb-1 text-gray-700 dark:text-gray-600 font-medium">Email</span>
           <input
             type="email"
             name="email"
@@ -65,7 +79,7 @@ const ContactUs = () => {
         </label>
 
         <label className="flex flex-col">
-          <span className="mb-1 text-gray-700 dark:text-gray-300 font-medium">Message</span>
+          <span className="mb-1 text-gray-700 dark:text-gray-600 font-medium">Message</span>
           <textarea
             name="message"
             value={formData.message}
@@ -85,6 +99,8 @@ const ContactUs = () => {
         </button>
       </form>
     </div>
+    </BackgroundWrapper>
+   
   );
 };
 

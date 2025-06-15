@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import BackgroundWrapper from "./BackgroundWrapper";
+import Lottie from "lottie-react";
 // import BackgroundWrapper from "../../components/BackgroundWrapper";
+import homeBgAnimation from "../assets/home-bg-lottie.json";
 
 const AboutUs = () => {
   return (
     <BackgroundWrapper>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white py-16 px-6 text-center">
+
+
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to EduSphere</h1>
         <p className="text-lg md:text-xl max-w-3xl mx-auto">
           Empowering minds through knowledge sharing. Write, read, and grow with a vibrant learning community.
@@ -15,7 +19,16 @@ const AboutUs = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-16 bg-white bg-opacity-90 rounded-xl shadow-lg mt-10">
+      <div className="max-w-6xl mx-auto px-6 py-16  bg-opacity-90 rounded-xl shadow-lg mt-10">
+
+         {/* 🔵 Animated Background */}
+              <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
+                <Lottie animationData={homeBgAnimation} loop={true} />
+              </div>
+        
+              {/* Main Content */}
+              <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
+
         {/* Mission */}
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-indigo-600 mb-4">🎯 Our Mission</h2>

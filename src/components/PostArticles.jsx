@@ -2,6 +2,9 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
 import toast from "react-hot-toast";
 import axios from "axios";
+import BackgroundWrapper from "./BackgroundWrapper";
+import Lottie from "lottie-react";
+import homeBgAnimation from "../assets/home-bg-lottie.json";
 
 const PostArticles = () => {
   const { user } = useContext(AuthContext);
@@ -51,8 +54,17 @@ const PostArticles = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-2xl shadow-md">
-      <h2 className="text-3xl font-semibold mb-6 text-center text-indigo-600">📝 Post a New Article</h2>
+    <BackgroundWrapper>
+ <div className="max-w-3xl mx-auto mt-10 p-6 rounded-2xl shadow-md">
+
+    {/* 🔵 Animated Background */}
+                <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
+                  <Lottie animationData={homeBgAnimation} loop={true} />
+                </div>
+          
+                {/* Main Content */}
+                <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
+      <h2 className="text-3xl font-semibold mb-6 text-center text-indigo-800">📝 Post a New Article</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <input
           type="text"
@@ -113,6 +125,8 @@ const PostArticles = () => {
         </button>
       </form>
     </div>
+    </BackgroundWrapper>
+   
   );
 };
 
