@@ -40,7 +40,6 @@ const MyArticles = () => {
     }
   };
 
-  // Delete with toast confirmation
   const handleDelete = (id) => {
     toast(
       (t) => (
@@ -103,8 +102,9 @@ const MyArticles = () => {
   const handleUpdate = async (e) => {
     e.preventDefault();
     try {
+      const { _id } = currentArticle;
+
       const updatedArticle = {
-        ...currentArticle,
         title: formData.title,
         content: formData.content,
         category: formData.category,
@@ -112,11 +112,11 @@ const MyArticles = () => {
         thumbnail: formData.thumbnail,
       };
 
-      await axios.put(`http://localhost:5000/articles/${currentArticle._id}`, updatedArticle);
+      await axios.put(`http://localhost:5000/articles/${_id}`, updatedArticle);
       toast.success("Article updated successfully");
 
       setArticles((prev) =>
-        prev.map((art) => (art._id === currentArticle._id ? updatedArticle : art))
+        prev.map((art) => (art._id === _id ? { ...art, ...updatedArticle } : art))
       );
       closeModal();
     } catch (error) {
