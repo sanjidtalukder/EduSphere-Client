@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import BackgroundWrapper from "./BackgroundWrapper";
+// import BackgroundWrapper from "../../components/BackgroundWrapper";
 
 const AboutUs = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <BackgroundWrapper>
       {/* Hero Section */}
       <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white py-16 px-6 text-center">
         <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to EduSphere</h1>
@@ -13,7 +15,7 @@ const AboutUs = () => {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-16">
+      <div className="max-w-6xl mx-auto px-6 py-16 bg-white bg-opacity-90 rounded-xl shadow-lg mt-10">
         {/* Mission */}
         <div className="mb-12">
           <h2 className="text-3xl font-bold text-indigo-600 mb-4">🎯 Our Mission</h2>
@@ -60,18 +62,18 @@ const AboutUs = () => {
           </div>
         </div>
 
-        {/* CTA */}
+        {/* Call to Action */}
         <div className="bg-indigo-100 rounded-xl p-8 text-center shadow-md mt-16">
           <h3 className="text-2xl font-bold text-indigo-700 mb-3">🚀 Start Your Journey Today!</h3>
           <p className="text-gray-700 text-lg mb-5">
             Whether you're here to learn or to teach, EduSphere welcomes you. Join us to make knowledge accessible and powerful.
           </p>
-          <a
-            href="/register"
+          <Link
+            to="/register"
             className="inline-block bg-indigo-600 text-white px-6 py-3 rounded-full font-semibold text-lg hover:bg-indigo-700 transition"
           >
             Create Your Free Account
-          </a>
+          </Link>
         </div>
 
         {/* Contact Info */}
@@ -80,14 +82,13 @@ const AboutUs = () => {
           <p className="text-gray-700">
             Have any questions or suggestions? Feel free to reach out at{" "}
             <a
-              href="mailto:contact@edusphere.com"
+              href="mailto:edusphere@gmail.com"
               className="text-indigo-500 underline font-medium"
             >
               edusphere@gmail.com
             </a>
           </p>
 
-          {/* Link to Contact Us Page */}
           <p className="mt-3">
             Or you can also fill out our{" "}
             <Link
@@ -99,7 +100,7 @@ const AboutUs = () => {
           </p>
         </div>
       </div>
-    </div>
+    </BackgroundWrapper>
   );
 };
 
