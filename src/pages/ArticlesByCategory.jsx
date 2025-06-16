@@ -13,23 +13,32 @@ const ArticlesByCategory = () => {
   }, [category]);
 
   return (
-    <div className="px-4 md:px-12 py-10 space-y-6">
-      <h2 className="text-3xl font-bold mb-6 text-blue-800">
+    <div className="px-4 sm:px-6 md:px-12 py-10 space-y-6 max-w-7xl mx-auto">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-800 text-center sm:text-left">
         🗂️ Articles in "{category}" category
       </h2>
 
       {articles.length === 0 ? (
-        <p className="text-gray-500 italic">No articles found for this category.</p>
+        <p className="text-center text-gray-500 italic">No articles found for this category.</p>
       ) : (
-        <div className="grid md:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {articles.map(article => (
-            <div key={article._id} className="bg-white p-5 shadow-md rounded-xl">
-              <h3 className="text-xl font-semibold">{article.title}</h3>
-              <p className="text-sm text-gray-600 my-2">{article.content?.slice(0, 80)}...</p>
-              <div className="flex items-center gap-2 mt-4">
-                <img src={article.author_photo} alt={article.author_name} className="w-10 h-10 rounded-full" />
+            <div
+              key={article._id}
+              className="bg-white p-5 shadow-md rounded-xl flex flex-col justify-between hover:shadow-lg transition-shadow duration-300"
+            >
+              <h3 className="text-lg sm:text-xl font-semibold mb-2">{article.title}</h3>
+              <p className="text-sm text-gray-600 mb-4 flex-grow">
+                {article.content?.slice(0, 100)}{article.content?.length > 100 ? "..." : ""}
+              </p>
+              <div className="flex items-center gap-3 mt-auto">
+                <img
+                  src={article.author_photo || "https://via.placeholder.com/40"}
+                  alt={article.author_name}
+                  className="w-10 h-10 rounded-full object-cover"
+                />
                 <div>
-                  <p className="font-medium">{article.author_name}</p>
+                  <p className="font-medium text-sm">{article.author_name}</p>
                   <p className="text-xs text-gray-500">{article.category}</p>
                 </div>
               </div>

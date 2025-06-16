@@ -15,7 +15,6 @@ const ArticleDetails = () => {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
 
-  // ✅ Load article
   useEffect(() => {
     fetch(`http://localhost:5000/articles/${id}`)
       .then((res) => {
@@ -27,7 +26,6 @@ const ArticleDetails = () => {
       .finally(() => setLoading(false));
   }, [id]);
 
-  // ✅ Load likes & check if user liked
   useEffect(() => {
     if (!user?.email) return;
 
@@ -40,7 +38,6 @@ const ArticleDetails = () => {
       .catch((err) => console.error("Like load error:", err));
   }, [id, user]);
 
-  // ✅ Load comments
   useEffect(() => {
     fetch(`http://localhost:5000/articles/${id}/comments`)
       .then((res) => res.json())
@@ -48,7 +45,6 @@ const ArticleDetails = () => {
       .catch((err) => console.error("Comment load error:", err));
   }, [id]);
 
-  // ✅ Handle like
   const handleLike = () => {
     if (!user?.email) return alert("Please login to like the article.");
 
@@ -69,7 +65,6 @@ const ArticleDetails = () => {
       .catch((err) => console.error("Like error:", err));
   };
 
-  // ✅ Handle comment
   const handleAddComment = () => {
     if (!user?.email) return alert("Please login to comment.");
     if (!newComment.trim()) return;
@@ -101,91 +96,99 @@ const ArticleDetails = () => {
 
   return (
     <BackgroundWrapper>
-<div className="flex justify-center py-12 px-4">
-      <div className="card w-full md:w-[800px] shadow-lg">
-        <figure>
-          <img
-            src={article?.thumbnail || "https://via.placeholder.com/600x300"}
-            alt={article?.title}
-            className="object-cover max-h-[400px] w-full"
-          />
-        </figure>
-        <div className="card-body">
-          <h2 className="card-title text-3xl">{article?.title}</h2>
-          <p className="text-gray-600">{article?.content}</p>
+      <div className="flex justify-center py-6 px-4 sm:px-6 lg:px-8">
+        <div className="card w-full max-w-4xl shadow-lg rounded-lg overflow-hidden bg-white">
+          <figure>
+            <img
+              src={article?.thumbnail || "https://via.placeholder.com/600x300"}
+              alt={article?.title}
+              className="object-cover w-full max-h-96 sm:max-h-[400px]"
+            />
+          </figure>
+          <div className="card-body p-6 sm:p-10">
+            <h2 className="card-title text-2xl sm:text-3xl font-bold mb-3">
+              {article?.title}
+            </h2>
+            <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
+              {article?.content}
+            </p>
 
-          <div className="text-sm text-gray-500">
-            Category: <span className="font-medium">{article?.category}</span>
-          </div>
-          <div className="text-sm text-gray-500">
-            Author: <span className="font-medium">{article?.author_name}</span>
-          </div>
-
-          {article?.tags?.length > 0 && (
-            <div className="mt-2 flex flex-wrap gap-2">
-              {article.tags.map((tag, idx) => (
-                <span
-                  key={idx}
-                  className="badge badge-outline text-xs text-blue-600"
-                >
-                  #{tag}
-                </span>
-              ))}
+            <div className="flex flex-col sm:flex-row sm:space-x-6 text-sm text-gray-500 mb-3">
+              <div>
+                Category: <span className="font-medium">{article?.category}</span>
+              </div>
+              <div className="mt-1 sm:mt-0">
+                Author: <span className="font-medium">{article?.author_name}</span>
+              </div>
             </div>
-          )}
 
-          <div className="card-actions justify-start mt-4">
-            <button
-              onClick={handleLike}
-              disabled={liked}
-              className={`btn ${liked ? "btn-secondary" : "btn-outline"}`}
-            >
-              {liked ? "Liked ❤️" : "Like 🤍"} ({likes})
-            </button>
-          </div>
+            {article?.tags?.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-6">
+                {article.tags.map((tag, idx) => (
+                  <span
+                    key={idx}
+                    className="badge badge-outline text-xs text-blue-600"
+                  >
+                    #{tag}
+                  </span>
+                ))}
+              </div>
+            )}
 
-          {/* Comments Section */}
-          <div className="mt-6">
-            <h3 className="text-xl font-semibold mb-2">
-              Comments ({comments.length})
-            </h3>
+            <div className="card-actions justify-start mb-6">
+              <button
+                onClick={handleLike}
+                disabled={liked}
+                className={`btn ${liked ? "btn-secondary" : "btn-outline"}`}
+              >
+                {liked ? "Liked ❤️" : "Like 🤍"} ({likes})
+              </button>
+            </div>
 
-            <div className="space-y-3 max-h-60 overflow-y-auto">
-              {comments.length === 0 && (
-                <p className="text-gray-500">No comments yet.</p>
-              )}
-              {comments.map((c) => (
-                <div key={c._id} className="flex items-start gap-3">
-                  <img
-                    src={c.user_photo || "https://via.placeholder.com/40"}
-                    alt={c.user_name}
-                    className="w-10 h-10 rounded-full object-cover"
-                  />
-                  <div>
-                    <p className="font-semibold">{c.user_name}</p>
-                    <p className="text-sm">{c.comment}</p>
+            {/* Comments Section */}
+            <div>
+              <h3 className="text-xl font-semibold mb-4">
+                Comments ({comments.length})
+              </h3>
+
+              <div className="space-y-4 max-h-60 overflow-y-auto pr-2">
+                {comments.length === 0 && (
+                  <p className="text-gray-500">No comments yet.</p>
+                )}
+                {comments.map((c) => (
+                  <div key={c._id} className="flex items-start gap-3">
+                    <img
+                      src={c.user_photo || "https://via.placeholder.com/40"}
+                      alt={c.user_name}
+                      className="w-10 h-10 rounded-full object-cover"
+                    />
+                    <div>
+                      <p className="font-semibold">{c.user_name}</p>
+                      <p className="text-sm">{c.comment}</p>
+                    </div>
                   </div>
-                </div>
-              ))}
-            </div>
+                ))}
+              </div>
 
-            {/* Comment Box */}
-            <textarea
-              className="textarea textarea-bordered w-full mt-4"
-              rows="3"
-              placeholder="Write a comment..."
-              value={newComment}
-              onChange={(e) => setNewComment(e.target.value)}
-            ></textarea>
-            <button onClick={handleAddComment} className="btn btn-primary mt-2">
-              Add Comment
-            </button>
+              {/* Comment Box */}
+              <textarea
+                className="textarea textarea-bordered w-full mt-4"
+                rows={3}
+                placeholder="Write a comment..."
+                value={newComment}
+                onChange={(e) => setNewComment(e.target.value)}
+              />
+              <button
+                onClick={handleAddComment}
+                className="btn btn-primary mt-3 w-full sm:w-auto"
+              >
+                Add Comment
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </BackgroundWrapper>
-    
   );
 };
 

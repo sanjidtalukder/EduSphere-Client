@@ -6,6 +6,7 @@ import homeBgAnimation from "../../assets/home-bg-lottie.json";
 import BackgroundWrapper from "../../components/BackgroundWrapper";
 import { Player } from "@lottiefiles/react-lottie-player";
 import heroBg from "../../assets/hero-bg.json";
+import LottieBackground from "../../components/LottieBackground";
 
 const Home = () => {
   const [articles, setArticles] = useState([]);
@@ -38,7 +39,12 @@ const Home = () => {
               src={heroBg}
               className="absolute inset-0 w-full h-full object-cover opacity-40 z-0"
             />
-            <section className="relative z-10 bg-white/90 backdrop-blur-md border border-blue-100 shadow-2xl py-14 px-6 sm:px-12 rounded-3xl text-center">
+
+            
+ <section className="relative z-10 border border-blue-100 shadow-2xl py-14 px-6 sm:px-12 rounded-3xl text-center">
+            <LottieBackground>
+              
+            </LottieBackground>
               <h1 className="text-3xl md:text-5xl font-extrabold mb-4 text-blue-800 drop-shadow">
                 Share Your Knowledge with the World
               </h1>
@@ -51,6 +57,8 @@ const Home = () => {
                 </button>
               </Link>
             </section>
+           
+           
           </div>
 
           {/* 🌟 Featured Articles */}
