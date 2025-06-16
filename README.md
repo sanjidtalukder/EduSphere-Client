@@ -36,7 +36,7 @@
 
 ```bash
 # 1. Clone the repository
-git clone https://github.com/your-username/edusphere-client.git
+git clone https://github.com/Programming-Hero-Web-Course4/b11a11-client-side-sanjidtalukder.git
 
 # 2. Navigate to the project directory
 cd edusphere-client
@@ -90,12 +90,12 @@ Programming Hero
 Visionary platform focusing on real-world web development education.
 
 📄 License
-This project is licensed under the MIT License.
-You are free to use, modify, and distribute it with proper attribution.
+This project is licensed under the Programming Hero.
+You are  free to use, modify, and distribute it with proper attribution.
 
 💬 Contact
 If you have any questions, feel free to reach out:
 
 📧 Email: edusphere@gmail.com
-📪 Contact Form: /contact-us on the site
-🌐 GitHub: github.com/your-username
+📪 Contact Form: Chandpur, Dhaka , Bangladesh
+🌐 GitHub: https://github.com/Programming-Hero-Web-Course4/b11a11-client-side-sanjidtalukder
