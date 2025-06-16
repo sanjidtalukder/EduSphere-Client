@@ -10,7 +10,7 @@ const Footer = () => {
         <div>
           <Link to="/" className="text-3xl font-extrabold flex items-center gap-2 text-blue-600 dark:text-blue-400">
             <span role="img" aria-label="book">📘</span>
-            <span>KnowledgeHub</span>
+            <span>EduSphere</span>
           </Link>
           <p className="mt-3 text-sm leading-relaxed text-gray-600 dark:text-gray-400">
             Discover articles, share ideas, and grow together. <br />Your gateway to a world of knowledge!

@@ -4,19 +4,38 @@ import BackgroundWrapper from "./BackgroundWrapper";
 import Lottie from "lottie-react";
 // import BackgroundWrapper from "../../components/BackgroundWrapper";
 import homeBgAnimation from "../assets/home-bg-lottie.json";
-
+// import LottieBackground from "../../components/LottieBackground";
+import heroBg from "../assets/hero-bg.json";
+import LottieBackground from "./LottieBackground";
 const AboutUs = () => {
   return (
     <BackgroundWrapper>
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-indigo-500 to-blue-600 text-white py-16 px-6 text-center">
+     <div className="relative overflow-hidden rounded-3xl shadow-xl">
+  {/* 🔵 Lottie Background */}
+  <LottieBackground animationData={heroBg} opacity={0.3} />
+
+  {/* 🔲 Overlay (optional but makes text more readable) */}
+  <div className="absolute inset-0 bg-black/30 z-0" />
+
+  {/* 🟣 Foreground Content */}
+  <div className="relative z-10 text-white py-20 px-6 md:px-16 text-center">
+    <h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
+      Welcome to <span className="text-yellow-300">EduSphere</span>
+    </h1>
+    <p className="text-lg md:text-2xl max-w-3xl mx-auto mb-8 drop-shadow-md">
+      Empowering minds through knowledge sharing.<br className="hidden md:block" />
+      Write, read, and grow with a vibrant learning community.
+    </p>
+    <Link to="/all-articles">
+      <button className="bg-white text-blue-700 hover:bg-blue-100 transition-all duration-300 py-3 px-8 rounded-full font-semibold shadow-md">
+        🚀 Explore Articles
+      </button>
+    </Link>
+  </div>
+</div>
 
 
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">Welcome to EduSphere</h1>
-        <p className="text-lg md:text-xl max-w-3xl mx-auto">
-          Empowering minds through knowledge sharing. Write, read, and grow with a vibrant learning community.
-        </p>
-      </div>
 
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-6 py-16  bg-opacity-90 rounded-xl shadow-lg mt-10">
@@ -30,7 +49,7 @@ const AboutUs = () => {
               <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
 
         {/* Mission */}
-        <div className="mb-12">
+        <div className="mb-6">
           <h2 className="text-3xl font-bold text-indigo-600 mb-4">🎯 Our Mission</h2>
           <p className="text-gray-700 text-lg leading-relaxed">
             At EduSphere, we believe that everyone has something valuable to share. Our mission is to build an open and inclusive platform where learners, educators, and curious minds can express their ideas through meaningful content and connect with others.
