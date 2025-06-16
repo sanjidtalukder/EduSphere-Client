@@ -29,14 +29,13 @@ const PostArticles = () => {
       email: user?.email,
       username: user?.displayName,
       date: new Date().toISOString(),
-      author_id: user?.uid, // Firebase UID
-      author_name: user?.displayName, //  Author Name
-      author_photo: user?.photoURL, //  Author Photo URL
+      author_id: user?.uid,
+      author_name: user?.displayName,
+      author_photo: user?.photoURL,
     };
 
     try {
       const res = await axios.post("http://localhost:5000/articles", article);
-
       if (res.data.insertedId || res.data.success) {
         toast.success("Article posted successfully!");
         setFormData({
@@ -55,78 +54,79 @@ const PostArticles = () => {
 
   return (
     <BackgroundWrapper>
- <div className="max-w-3xl mx-auto mt-10 p-6 rounded-2xl shadow-md">
+      {/* 🔵 Background Animation */}
+      <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-20 pointer-events-none">
+        <Lottie animationData={homeBgAnimation} loop={true} />
+      </div>
 
-    {/* 🔵 Animated Background */}
-                <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
-                  <Lottie animationData={homeBgAnimation} loop={true} />
-                </div>
-          
-                {/* Main Content */}
-                <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
-      <h2 className="text-3xl font-semibold mb-6 text-center text-indigo-800">📝 Post a New Article</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="title"
-          placeholder="Article Title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
-        <textarea
-          name="content"
-          rows="6"
-          placeholder="Write your article content here..."
-          value={formData.content}
-          onChange={handleChange}
-          required
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
-        <input
-          type="text"
-          name="category"
-          placeholder="Category (e.g. Tech, Health)"
-          value={formData.category}
-          onChange={handleChange}
-          required
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
-        <input
-          type="text"
-          name="tags"
-          placeholder="Tags (comma-separated)"
-          value={formData.tags}
-          onChange={handleChange}
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
-        <input
-          type="text"
-          name="thumbnail"
-          placeholder="Thumbnail Image URL"
-          value={formData.thumbnail}
-          onChange={handleChange}
-          required
-          className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        />
+      {/* 🔵 Main Content */}
+      <div className="max-w-3xl mx-auto mt-10 px-4 sm:px-6 md:px-10 py-8 rounded-2xl shadow-md bg-white bg-opacity-90 backdrop-blur-md">
+        <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-indigo-700">
+          📝 Post a New Article
+        </h2>
 
-        {/* User Info */}
-        <div className="text-sm text-gray-600">
-          <p>📧 <strong>Email:</strong> {user?.email}</p>
-          <p>👤 <strong>Username:</strong> {user?.displayName}</p>
-        </div>
+        <form onSubmit={handleSubmit} className="space-y-4 text-sm sm:text-base">
+          <input
+            type="text"
+            name="title"
+            placeholder="Article Title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          />
+          <textarea
+            name="content"
+            rows="5"
+            placeholder="Write your article content here..."
+            value={formData.content}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
+          />
+          <input
+            type="text"
+            name="category"
+            placeholder="Category (e.g. Tech, Health)"
+            value={formData.category}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          />
+          <input
+            type="text"
+            name="tags"
+            placeholder="Tags (comma-separated)"
+            value={formData.tags}
+            onChange={handleChange}
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          />
+          <input
+            type="text"
+            name="thumbnail"
+            placeholder="Thumbnail Image URL"
+            value={formData.thumbnail}
+            onChange={handleChange}
+            required
+            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          />
 
-        <button
-          type="submit"
-          className="w-full bg-indigo-600 text-white py-3 rounded-lg hover:bg-indigo-700 transition-all duration-300"
-        >
-          🚀 Publish Article
-        </button>
-      </form>
-    </div>
+          {/* 🔵 User Info (readonly) */}
+          <div className="text-sm text-gray-600 mt-4 space-y-1">
+            <p>📧 <strong>Email:</strong> {user?.email}</p>
+            <p>👤 <strong>Username:</strong> {user?.displayName}</p>
+          </div>
+
+          {/* 🔘 Submit */}
+          <button
+            type="submit"
+            className="w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition duration-300 text-base font-medium"
+          >
+            🚀 Publish Article
+          </button>
+        </form>
+      </div>
     </BackgroundWrapper>
-   
   );
 };
 

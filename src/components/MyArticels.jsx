@@ -34,7 +34,6 @@ const MyArticles = () => {
     try {
       setLoading(true);
       const res = await axios.get(`http://localhost:5000/articles?author_id=${user.uid}`);
-      
       setArticles(res.data);
     } catch (error) {
       console.error(error);
@@ -140,147 +139,145 @@ const MyArticles = () => {
 
   return (
     <BackgroundWrapper>
-<div className="max-w-5xl mx-auto mt-10 p-6 rounded-2xl shadow-lg">
-
-   {/* 🔵 Animated Background */}
-                <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
-                  <Lottie animationData={homeBgAnimation} loop={true} />
-                </div>
-          
-                {/* Main Content */}
-                <div className="relative z-10 px-4 md:px-12 space-y-20 pt-10 pb-20"></div>
-      <h2 className="text-4xl font-extrabold mb-8 text-center text-indigo-600 tracking-wide">📝 My Articles</h2>
-
-      {articles.length === 0 ? (
-        <p className="text-center text-gray-500 italic text-lg">You haven’t posted any articles yet. Start sharing your knowledge!</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-200 rounded-md shadow-sm">
-            <thead className="bg-indigo-50">
-              <tr>
-                <th className="border-b border-gray-300 px-5 py-3 text-left text-indigo-700 font-semibold">Title</th>
-                <th className="border-b border-gray-300 px-5 py-3 text-left text-indigo-700 font-semibold">Category</th>
-                <th className="border-b border-gray-300 px-5 py-3 text-left text-indigo-700 font-semibold">Tags</th>
-                <th className="border-b border-gray-300 px-5 py-3 text-center text-indigo-700 font-semibold">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {articles.map((article) => (
-                <tr
-                  key={article._id}
-                  className="hover:bg-indigo-50 transition cursor-pointer"
-                  title={article.title}
-                >
-                  <td className="border-b border-gray-200 px-5 py-3 max-w-xs truncate">{article.title}</td>
-                  <td className="border-b border-gray-200 px-5 py-3">{article.category}</td>
-                  <td className="border-b border-gray-200 px-5 py-3">
-                    {article.tags?.map((tag, i) => (
-                      <span
-                        key={i}
-                        className="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </td>
-                  <td className="border-b border-gray-200 px-5 py-3 text-center space-x-2">
-                    <button
-                      onClick={() => openUpdateModal(article)}
-                      className="bg-indigo-600 text-white px-4 py-1 rounded-md hover:bg-indigo-700 transition"
-                      aria-label={`Update article ${article.title}`}
-                    >
-                      Update
-                    </button>
-                    <button
-                      onClick={() => handleDelete(article._id)}
-                      className="bg-red-600 text-white px-4 py-1 rounded-md hover:bg-red-700 transition"
-                      aria-label={`Delete article ${article.title}`}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+      <div className="relative">
+        {/* 🔵 Animated Background */}
+        <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
+          <Lottie animationData={homeBgAnimation} loop={true} />
         </div>
-      )}
 
-      {/* Update Modal */}
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Update Article"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50"
-        className="bg-white rounded-xl shadow-xl max-w-lg w-full p-8 mx-4 outline-none"
-      >
-        <h2 className="text-3xl font-semibold mb-6 text-indigo-600">Update Article</h2>
-        <form onSubmit={handleUpdate} className="space-y-5">
-          <input
-            type="text"
-            name="title"
-            placeholder="Article Title"
-            value={formData.title}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
-          />
-          <textarea
-            name="content"
-            rows="6"
-            placeholder="Write your article content here..."
-            value={formData.content}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition resize-none"
-          />
-          <input
-            type="text"
-            name="category"
-            placeholder="Category (e.g. Tech, Health)"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
-          />
-          <input
-            type="text"
-            name="tags"
-            placeholder="Tags (comma-separated)"
-            value={formData.tags}
-            onChange={handleChange}
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
-          />
-          <input
-            type="text"
-            name="thumbnail"
-            placeholder="Thumbnail Image URL"
-            value={formData.thumbnail}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
-          />
+        <div className="max-w-6xl mx-auto mt-10 px-4 sm:px-6 lg:px-8 py-8 bg-white/70 dark:bg-gray-900/60 backdrop-blur-md rounded-2xl shadow-xl">
+          <h2 className="text-3xl md:text-4xl font-extrabold mb-8 text-center text-indigo-600 tracking-wide">📝 My Articles</h2>
 
-          <div className="flex justify-end space-x-4 mt-6">
-            <button
-              type="button"
-              onClick={closeModal}
-              className="px-6 py-2 rounded border border-gray-300 hover:bg-gray-100 transition"
-            >
-              Cancel
-            </button>
-            <button
-              type="submit"
-              className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
-            >
-              Update Article
-            </button>
-          </div>
-        </form>
-      </Modal>
-    </div>
+          {articles.length === 0 ? (
+            <p className="text-center text-gray-500 italic text-lg">You haven’t posted any articles yet. Start sharing your knowledge!</p>
+          ) : (
+            <div className="overflow-x-auto">
+              <table className="w-full table-auto border border-gray-200 rounded-md shadow-sm text-sm md:text-base">
+                <thead className="bg-indigo-50">
+                  <tr>
+                    <th className="border-b border-gray-300 px-3 md:px-5 py-3 text-left text-indigo-700 font-semibold">Title</th>
+                    <th className="border-b border-gray-300 px-3 md:px-5 py-3 text-left text-indigo-700 font-semibold">Category</th>
+                    <th className="border-b border-gray-300 px-3 md:px-5 py-3 text-left text-indigo-700 font-semibold">Tags</th>
+                    <th className="border-b border-gray-300 px-3 md:px-5 py-3 text-center text-indigo-700 font-semibold">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {articles.map((article) => (
+                    <tr
+                      key={article._id}
+                      className="hover:bg-indigo-50 transition cursor-pointer"
+                      title={article.title}
+                    >
+                      <td className="border-b border-gray-200 px-3 md:px-5 py-3 max-w-xs truncate">{article.title}</td>
+                      <td className="border-b border-gray-200 px-3 md:px-5 py-3">{article.category}</td>
+                      <td className="border-b border-gray-200 px-3 md:px-5 py-3">
+                        {article.tags?.map((tag, i) => (
+                          <span
+                            key={i}
+                            className="inline-block bg-indigo-100 text-indigo-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded-full"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </td>
+                      <td className="border-b border-gray-200 px-3 md:px-5 py-3 text-center space-x-2">
+                        <button
+                          onClick={() => openUpdateModal(article)}
+                          className="bg-indigo-600 text-white px-3 md:px-4 py-1 rounded-md hover:bg-indigo-700 transition"
+                          aria-label={`Update article ${article.title}`}
+                        >
+                          Update
+                        </button>
+                        <button
+                          onClick={() => handleDelete(article._id)}
+                          className="bg-red-600 text-white px-3 md:px-4 py-1 rounded-md hover:bg-red-700 transition"
+                          aria-label={`Delete article ${article.title}`}
+                        >
+                          Delete
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          )}
+
+          {/* Update Modal */}
+          <Modal
+            isOpen={modalIsOpen}
+            onRequestClose={closeModal}
+            contentLabel="Update Article"
+            overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50"
+            className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-lg w-full p-6 md:p-8 mx-4 outline-none"
+          >
+            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-indigo-600">Update Article</h2>
+            <form onSubmit={handleUpdate} className="space-y-4 md:space-y-5">
+              <input
+                type="text"
+                name="title"
+                placeholder="Article Title"
+                value={formData.title}
+                onChange={handleChange}
+                required
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+              />
+              <textarea
+                name="content"
+                rows="6"
+                placeholder="Write your article content here..."
+                value={formData.content}
+                onChange={handleChange}
+                required
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition resize-none"
+              />
+              <input
+                type="text"
+                name="category"
+                placeholder="Category (e.g. Tech, Health)"
+                value={formData.category}
+                onChange={handleChange}
+                required
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+              />
+              <input
+                type="text"
+                name="tags"
+                placeholder="Tags (comma-separated)"
+                value={formData.tags}
+                onChange={handleChange}
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+              />
+              <input
+                type="text"
+                name="thumbnail"
+                placeholder="Thumbnail Image URL"
+                value={formData.thumbnail}
+                onChange={handleChange}
+                required
+                className="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400 transition"
+              />
+
+              <div className="flex justify-end space-x-4 mt-6">
+                <button
+                  type="button"
+                  onClick={closeModal}
+                  className="px-6 py-2 rounded border border-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="bg-indigo-600 text-white px-6 py-2 rounded hover:bg-indigo-700 transition"
+                >
+                  Update Article
+                </button>
+              </div>
+            </form>
+          </Modal>
+        </div>
+      </div>
     </BackgroundWrapper>
-    
   );
 };
 
