@@ -13,13 +13,21 @@ const Footer = () => {
 
         {/* Logo & Description */}
         <div>
-          <Link
+          {/* <Link
             to="/"
             className="text-3xl font-extrabold flex items-center gap-2 text-blue-600 dark:text-blue-400"
           >
             <span role="img" aria-label="book">📘</span>
             <span>EduSphere</span>
-          </Link>
+          </Link> */}
+
+          <Link
+           to="/" 
+          className="text-3xl font-extrabold flex items-center gap-2 text-blue-600 dark:text-blue-400">
+  <img src="/public/educational.png" alt="book" className="w-8 h-8" />
+  <span>EduSphere</span>
+</Link>
+
           <p className="mt-4 text-sm text-gray-600 dark:text-gray-400 leading-relaxed">
             Discover articles, share ideas, and grow together. <br />
             Your gateway to a world of knowledge!

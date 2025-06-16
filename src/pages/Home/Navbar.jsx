@@ -63,12 +63,11 @@ const Navbar = () => {
     <nav className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 shadow-md">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-2xl font-bold flex items-center gap-2">
-          <span role="img" aria-label="book">
-            📘
-          </span>
-          <span>EduSphere</span>
-        </Link>
+       <Link to="/" className="text-3xl font-extrabold flex items-center gap-2 text-blue-600 dark:text-blue-400">
+  <img src="/public/educational.png" alt="book" className="w-8 h-8" />
+  <span>EduSphere</span>
+</Link>
+
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">{navLinks}</div>
