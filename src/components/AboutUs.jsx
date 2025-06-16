@@ -12,13 +12,13 @@ const AboutUs = () => {
     <BackgroundWrapper>
       {/* Hero Section */}
      <div className="relative overflow-hidden rounded-3xl shadow-xl">
-  {/* 🔵 Lottie Background */}
+  {/*  Lottie Background */}
   <LottieBackground animationData={heroBg} opacity={0.3} />
 
-  {/* 🔲 Overlay (optional but makes text more readable) */}
+  {/*  Overlay (optional but makes text more readable) */}
   <div className="absolute inset-0 bg-black/30 z-0" />
 
-  {/* 🟣 Foreground Content */}
+  {/*  Foreground Content */}
   <div className="relative z-10 text-white py-20 px-6 md:px-16 text-center">
     <h1 className="text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
       Welcome to <span className="text-yellow-300">EduSphere</span>
@@ -38,7 +38,7 @@ const AboutUs = () => {
 
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 py-16  bg-opacity-90 rounded-xl shadow-lg mt-10">
+      <div className="max-w-6xl mx-auto px-6   bg-opacity-90 rounded-xl shadow-lg mt-10">
 
          {/* 🔵 Animated Background */}
               <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
