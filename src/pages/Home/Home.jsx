@@ -13,7 +13,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/articles/featured")
+    fetch("https://hobbyhub-server-delta.vercel.app/articles/featured")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);

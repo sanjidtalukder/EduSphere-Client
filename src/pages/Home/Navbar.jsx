@@ -6,6 +6,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
   const navigate = useNavigate();
+
   const [theme, setTheme] = useState(localStorage.getItem("theme") === "dark" ? "dark" : "light");
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -16,8 +17,8 @@ const Navbar = () => {
     document.documentElement.classList.add(theme);
   }, [theme]);
 
-  const handleThemeChange = (e) => {
-    setTheme(e.target.checked ? "dark" : "light");
+  const toggleTheme = () => {
+    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
   };
 
   const handleLogout = () => {
@@ -48,7 +49,7 @@ const Navbar = () => {
           to={to}
           onClick={() => setMobileMenuOpen(false)}
           className={({ isActive }) =>
-            `block px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 ${
+            `block px-3 py-2 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition ${
               isActive ? "font-bold underline text-blue-600 dark:text-blue-400" : ""
             }`
           }
@@ -60,33 +61,37 @@ const Navbar = () => {
   );
 
   return (
-    <nav className="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 shadow-md">
+    
+      <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
-       <Link to="/" className="text-3xl font-extrabold flex items-center gap-2 text-blue-600 dark:text-blue-400">
-  <img src="/public/educational.png" alt="book" className="w-8 h-8" />
-  <span>EduSphere</span>
-</Link>
-
+        <Link
+          to="/"
+          className="text-3xl font-extrabold flex items-center gap-2 text-blue-600 dark:text-blue-400"
+        >
+          <img
+            src="/educational.png"
+            alt="book"
+            className="w-8 h-8 rounded-full object-cover"
+          />
+          <span>EduSphere</span>
+        </Link>
 
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-6">{navLinks}</div>
 
         {/* Right Section */}
         <div className="flex items-center gap-4">
-          {/* Theme Switch */}
-          <label className="flex items-center cursor-pointer select-none">
-            <input
-              type="checkbox"
-              className="toggle"
-              onChange={handleThemeChange}
-              checked={theme === "dark"}
-              aria-label="Toggle dark mode"
-            />
-            <span className="ml-2 text-lg">{theme === "dark" ? "🌙" : "☀️"}</span>
-          </label>
+          {/* Emoji toggle only */}
+          <span
+            className="text-2xl cursor-pointer"
+            onClick={toggleTheme}
+            aria-label="Toggle Theme"
+          >
+            {theme === "dark" ? "🌙" : "☀️"}
+          </span>
 
-          {/* User / Login Button */}
+          {/* User / Login */}
           {!user ? (
             <Link
               to="/login"
@@ -97,9 +102,9 @@ const Navbar = () => {
           ) : (
             <div className="relative">
               <img
-                src={user?.photoURL || "/default-avatar.png"}
+                src={user?.photoURL || "/avatardefault.webp"}
                 alt="profile"
-                className="w-10 h-10 rounded-full cursor-pointer border-2 border-blue-500"
+                className="w-10 h-10 rounded-full object-cover cursor-pointer border-2 border-blue-500"
                 onClick={() => setDropdownOpen((prev) => !prev)}
               />
               {dropdownOpen && (
@@ -145,8 +150,17 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden px-4 py-3 flex flex-col gap-2 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-all">
+        <div className="md:hidden px-4 py-3 flex flex-col gap-2 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-all duration-300">
+          {/* Emoji in Mobile */}
+          <div
+            className="text-2xl mb-2 cursor-pointer"
+            onClick={toggleTheme}
+          >
+            {theme === "dark" ? "🌙" : "☀️"}
+          </div>
+
           {navLinks}
+
           {user && (
             <button
               onClick={handleLogout}

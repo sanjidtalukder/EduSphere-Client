@@ -16,7 +16,7 @@ const ArticleDetails = () => {
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-    fetch(`http://localhost:5000/articles/${id}`)
+    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Article not found");
         return res.json();
@@ -29,7 +29,7 @@ const ArticleDetails = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`http://localhost:5000/articles/${id}/likes`)
+    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/likes`)
       .then((res) => res.json())
       .then(({ totalLikes, likedBy }) => {
         setLikes(totalLikes);
@@ -39,7 +39,7 @@ const ArticleDetails = () => {
   }, [id, user]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/articles/${id}/comments`)
+    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/comments`)
       .then((res) => res.json())
       .then(setComments)
       .catch((err) => console.error("Comment load error:", err));
@@ -48,7 +48,7 @@ const ArticleDetails = () => {
   const handleLike = () => {
     if (!user?.email) return alert("Please login to like the article.");
 
-    fetch(`http://localhost:5000/articles/${id}/like`, {
+    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/like`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: user.email }),
@@ -76,7 +76,7 @@ const ArticleDetails = () => {
       comment: newComment.trim(),
     };
 
-    fetch(`http://localhost:5000/articles/${id}/comment`, {
+    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/comment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(commentData),

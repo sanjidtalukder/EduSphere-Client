@@ -35,7 +35,7 @@ const PostArticles = () => {
     };
 
     try {
-      const res = await axios.post("http://localhost:5000/articles", article);
+      const res = await axios.post("https://hobbyhub-server-delta.vercel.app/articles", article);
       if (res.data.insertedId || res.data.success) {
         toast.success("Article posted successfully!");
         setFormData({

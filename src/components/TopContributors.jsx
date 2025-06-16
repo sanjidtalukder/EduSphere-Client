@@ -4,7 +4,7 @@ const TopContributors = () => {
   const [contributors, setContributors] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/top-contributors")
+    fetch("https://hobbyhub-server-delta.vercel.app/top-contributors")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched contributors:", data);

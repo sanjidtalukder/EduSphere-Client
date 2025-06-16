@@ -33,7 +33,7 @@ const MyArticles = () => {
   const fetchArticles = async () => {
     try {
       setLoading(true);
-      const res = await axios.get(`http://localhost:5000/articles?author_id=${user.uid}`);
+      const res = await axios.get(`https://hobbyhub-server-delta.vercel.app/articles?author_id=${user.uid}`);
       setArticles(res.data);
     } catch (error) {
       console.error(error);
@@ -51,7 +51,7 @@ const MyArticles = () => {
           <div className="flex justify-end space-x-2">
             <button
               onClick={() => {
-                axios.delete(`http://localhost:5000/articles/${id}`)
+                axios.delete(`https://hobbyhub-server-delta.vercel.app/articles/${id}`)
                   .then(() => {
                     setArticles((prev) => prev.filter((art) => art._id !== id));
                     toast.success("Article deleted successfully");
@@ -115,7 +115,7 @@ const MyArticles = () => {
         thumbnail: formData.thumbnail,
       };
 
-      await axios.put(`http://localhost:5000/articles/${_id}`, updatedArticle);
+      await axios.put(`https://hobbyhub-server-delta.vercel.app/articles/${_id}`, updatedArticle);
       toast.success("Article updated successfully");
 
       setArticles((prev) =>

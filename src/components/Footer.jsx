@@ -24,7 +24,7 @@ const Footer = () => {
           <Link
            to="/" 
           className="text-3xl font-extrabold flex items-center gap-2 text-blue-600 dark:text-blue-400">
-  <img src="/public/educational.png" alt="book" className="w-8 h-8" />
+  <img src="/educational.png" alt="book" className="w-8 h-8" />
   <span>EduSphere</span>
 </Link>
 

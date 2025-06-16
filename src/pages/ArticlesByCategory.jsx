@@ -6,7 +6,7 @@ const ArticlesByCategory = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/articles/category/${category}`)
+    fetch(`https://hobbyhub-server-delta.vercel.app/articles/category/${category}`)
       .then(res => res.json())
       .then(data => setArticles(data))
       .catch(err => console.error("Error loading articles:", err));
