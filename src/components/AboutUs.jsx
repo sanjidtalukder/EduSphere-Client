@@ -14,7 +14,7 @@ const AboutUs = () => {
         <LottieBackground animationData={heroBg} opacity={0.3} />
         <div className="absolute inset-0 bg-black/30 z-0" />
 
-        <div className="relative z-10 text-white py-20 px-4 sm:px-8 md:px-16 text-center">
+        <div className="relative z-10 text-white py-20  px-4 sm:px-8 md:px-16 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold mb-6 drop-shadow-lg">
             Welcome to <span className="text-yellow-300">EduSphere</span>
           </h1>

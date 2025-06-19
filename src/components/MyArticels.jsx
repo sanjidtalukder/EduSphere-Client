@@ -149,7 +149,7 @@ const MyArticles = () => {
           <h2 className="text-3xl md:text-4xl font-extrabold mb-8 text-center text-indigo-600 tracking-wide">📝 My Articles</h2>
 
           {articles.length === 0 ? (
-            <p className="text-center text-gray-500 italic text-lg">You haven’t posted any articles yet. Start sharing your knowledge!</p>
+            <p className="text-center text-gray-100 italic text-lg">You haven’t posted any articles yet. Start sharing your knowledge!</p>
           ) : (
             <div className="overflow-x-auto">
               <table className="w-full table-auto border border-gray-200 rounded-md shadow-sm text-sm md:text-base">
@@ -209,9 +209,9 @@ const MyArticles = () => {
             onRequestClose={closeModal}
             contentLabel="Update Article"
             overlayClassName="fixed inset-0 bg-black bg-opacity-30 flex justify-center items-center z-50"
-            className="bg-white dark:bg-gray-800 rounded-xl shadow-xl max-w-lg w-full p-6 md:p-8 mx-4 outline-none"
+            className="bg-white dark:bg-gray-600 text-white rounded-xl shadow-xl max-w-lg  w-full p-6 md:p-8 mx-4 outline-none"
           >
-            <h2 className="text-2xl md:text-3xl font-semibold mb-6 text-indigo-600">Update Article</h2>
+            <h2 className="text-2xl md:text-3xl font-semibold  mb-6 text-indigo-600">Update Article</h2>
             <form onSubmit={handleUpdate} className="space-y-4 md:space-y-5">
               <input
                 type="text"

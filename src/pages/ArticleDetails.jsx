@@ -158,7 +158,7 @@ const ArticleDetails = () => {
                 {comments.map((c) => (
                   <div key={c._id} className="flex items-start gap-3">
                     <img
-                      src={c.user_photo || "https://via.placeholder.com/40"}
+                      src={c.user_photo || "/avatardefault.webp"}
                       alt={c.user_name}
                       className="w-10 h-10 rounded-full object-cover"
                     />

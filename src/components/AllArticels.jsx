@@ -44,7 +44,7 @@ const AllArticels = () => {
         <Lottie animationData={homeBgAnimation} loop />
       </div>
 
-      <div className="relative z-10 px-4 sm:px-6 md:px-12 min-h-screen pb-20">
+      <div className="relative z-10 px-4 pt-16 sm:px-6 md:px-12 min-h-screen pb-20">
         <h2 className="text-3xl sm:text-4xl font-bold text-center text-blue-900 mb-12 drop-shadow-sm">
           📚 Explore All Articles
         </h2>
