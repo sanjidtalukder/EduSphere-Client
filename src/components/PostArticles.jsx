@@ -8,6 +8,7 @@ import homeBgAnimation from "../assets/home-bg-lottie.json";
 
 const PostArticles = () => {
   const { user } = useContext(AuthContext);
+
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -16,8 +17,14 @@ const PostArticles = () => {
     thumbnail: "",
   });
 
+  const [customCategory, setCustomCategory] = useState(false);
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleSubmit = async (e) => {
@@ -25,17 +32,21 @@ const PostArticles = () => {
 
     const article = {
       ...formData,
-      tags: formData.tags.split(",").map(tag => tag.trim()),
+      tags: formData.tags.split(",").map((tag) => tag.trim()),
       email: user?.email,
       username: user?.displayName,
       date: new Date().toISOString(),
       author_id: user?.uid,
       author_name: user?.displayName,
       author_photo: user?.photoURL,
+      thumbnail:
+        formData.thumbnail.trim() === ""
+          ? "/public/educational.png"
+          : formData.thumbnail,
     };
 
     try {
-      const res = await axios.post("https://hobbyhub-server-delta.vercel.app/articles", article);
+      const res = await axios.post("https://my-edu-sphere-server-ten.vercel.app/articles", article);
       if (res.data.insertedId || res.data.success) {
         toast.success("Article posted successfully!");
         setFormData({
@@ -45,6 +56,7 @@ const PostArticles = () => {
           tags: "",
           thumbnail: "",
         });
+        setCustomCategory(false);
       }
     } catch (error) {
       toast.error("Failed to post article");
@@ -54,12 +66,10 @@ const PostArticles = () => {
 
   return (
     <BackgroundWrapper>
-      {/* 🔵 Background Animation */}
       <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-20 pointer-events-none">
         <Lottie animationData={homeBgAnimation} loop={true} />
       </div>
 
-      {/* 🔵 Main Content */}
       <div className="max-w-3xl mx-auto mt-10 px-4 sm:px-6 md:px-10 py-8 rounded-2xl shadow-md bg-white bg-opacity-90 backdrop-blur-md">
         <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center text-indigo-700">
           📝 Post a New Article
@@ -75,6 +85,7 @@ const PostArticles = () => {
             required
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           />
+
           <textarea
             name="content"
             rows="5"
@@ -84,15 +95,50 @@ const PostArticles = () => {
             required
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
           />
-          <input
-            type="text"
-            name="category"
-            placeholder="Category (e.g. Tech, Health)"
-            value={formData.category}
-            onChange={handleChange}
-            required
-            className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
-          />
+
+          {/* ✅ Category Select + Optional Input */}
+          <div>
+            <label className="block mb-1 font-medium text-gray-700">Category</label>
+            <select
+              name="category"
+              value={formData.category}
+              onChange={(e) => {
+                const value = e.target.value;
+                setFormData((prev) => ({
+                  ...prev,
+                  category: value,
+                }));
+                setCustomCategory(value === "Other");
+              }}
+              required
+              className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+            >
+              <option value="" disabled>
+                Select Category
+              </option>
+              <option value="Finance"> Finance</option>
+              <option value="Flower"> Flower</option>
+              <option value="Love"> Love</option>
+              <option value="Loves"> Loves</option>
+              <option value="Science"> Science</option>
+              <option value="Sports">Sports</option>
+              <option value="Other"> Other (Write your own)</option>
+            </select>
+
+            {customCategory && (
+              <input
+                type="text"
+                name="category"
+                placeholder="Write your own category"
+                value={formData.category}
+                onChange={handleChange}
+                className="mt-3 w-full p-3 border border-blue-400 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 transition"
+                required
+              />
+            )}
+          </div>
+
+          {/* Tags */}
           <input
             type="text"
             name="tags"
@@ -101,23 +147,31 @@ const PostArticles = () => {
             onChange={handleChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           />
+
+          {/* ✅ Thumbnail */}
           <input
             type="text"
             name="thumbnail"
             placeholder="Thumbnail Image URL"
             value={formData.thumbnail}
             onChange={handleChange}
-            required
+            onBlur={() => {
+              if (formData.thumbnail.trim() === "") {
+                setFormData((prev) => ({
+                  ...prev,
+                  thumbnail: "/public/educational.png",
+                }));
+              }
+            }}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           />
 
-          {/* 🔵 User Info (readonly) */}
+          {/* Read-only user info */}
           <div className="text-sm text-gray-600 mt-4 space-y-1">
             <p>📧 <strong>Email:</strong> {user?.email}</p>
             <p>👤 <strong>Username:</strong> {user?.displayName}</p>
           </div>
 
-          {/* 🔘 Submit */}
           <button
             type="submit"
             className="w-full bg-indigo-600 text-white py-3 rounded-md hover:bg-indigo-700 transition duration-300 text-base font-medium"

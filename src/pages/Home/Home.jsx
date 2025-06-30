@@ -13,7 +13,7 @@ const Home = () => {
   const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    fetch("https://hobbyhub-server-delta.vercel.app/articles/featured")
+    fetch("https://my-edu-sphere-server-ten.vercel.app/articles/featured")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
@@ -119,7 +119,7 @@ const Home = () => {
                   ))}
               </div>
             ) : (
-              <p className="text-gray-500 text-center">No categories found.</p>
+              <p className="text-gray-500 pt-20 text-center">No categories found.</p>
             )}
           </section>
 

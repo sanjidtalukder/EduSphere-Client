@@ -16,7 +16,7 @@ const ArticleDetails = () => {
   const [newComment, setNewComment] = useState("");
 
   useEffect(() => {
-    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}`)
+    fetch(`https://my-edu-sphere-server-ten.vercel.app/articles/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Article not found");
         return res.json();
@@ -29,7 +29,7 @@ const ArticleDetails = () => {
   useEffect(() => {
     if (!user?.email) return;
 
-    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/likes`)
+    fetch(`https://my-edu-sphere-server-ten.vercel.app/articles/${id}/likes`)
       .then((res) => res.json())
       .then(({ totalLikes, likedBy }) => {
         setLikes(totalLikes);
@@ -39,7 +39,7 @@ const ArticleDetails = () => {
   }, [id, user]);
 
   useEffect(() => {
-    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/comments`)
+    fetch(`https://my-edu-sphere-server-ten.vercel.app/articles/${id}/comments`)
       .then((res) => res.json())
       .then(setComments)
       .catch((err) => console.error("Comment load error:", err));
@@ -48,7 +48,7 @@ const ArticleDetails = () => {
   const handleLike = () => {
     if (!user?.email) return alert("Please login to like the article.");
 
-    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/like`, {
+    fetch(`https://my-edu-sphere-server-ten.vercel.app/articles/${id}/like`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email: user.email }),
@@ -76,7 +76,7 @@ const ArticleDetails = () => {
       comment: newComment.trim(),
     };
 
-    fetch(`https://hobbyhub-server-delta.vercel.app/articles/${id}/comment`, {
+    fetch(`https://my-edu-sphere-server-ten.vercel.app/articles/${id}/comment`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(commentData),
@@ -96,7 +96,7 @@ const ArticleDetails = () => {
 
   return (
     <BackgroundWrapper>
-      <div className="flex justify-center py-6 px-4 sm:px-6 lg:px-8">
+      <div className="flex justify-center pt-16 py-6 px-4 sm:px-6 lg:px-8">
         <div className="card w-full max-w-4xl shadow-lg rounded-lg overflow-hidden bg-white">
           <figure>
             <img

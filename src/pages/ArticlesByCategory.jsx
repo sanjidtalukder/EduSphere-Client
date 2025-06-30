@@ -6,7 +6,7 @@ const ArticlesByCategory = () => {
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
-    fetch(`https://hobbyhub-server-delta.vercel.app/articles/category/${category}`)
+    fetch(`https://my-edu-sphere-server-ten.vercel.app/articles/category/${category}`)
       .then(res => res.json())
       .then(data => setArticles(data))
       .catch(err => console.error("Error loading articles:", err));
@@ -14,7 +14,7 @@ const ArticlesByCategory = () => {
 
   return (
     <div className="px-4 sm:px-6 md:px-12 py-10 space-y-6 max-w-7xl mx-auto">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-blue-800 text-center sm:text-left">
+      <h2 className="text-2xl sm:text-3xl font-bold mb-6 pt-16 text-blue-800 text-center sm:text-left">
         🗂️ Articles in "{category}" category
       </h2>
 
@@ -33,7 +33,7 @@ const ArticlesByCategory = () => {
               </p>
               <div className="flex items-center gap-3 mt-auto">
                 <img
-                  src={article.author_photo || "https://via.placeholder.com/40"}
+                  src={article.author_photo || "/avatardefault.webp"}
                   alt={article.author_name}
                   className="w-10 h-10 rounded-full object-cover"
                 />

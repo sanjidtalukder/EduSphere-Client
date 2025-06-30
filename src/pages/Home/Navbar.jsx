@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { FaBars, FaTimes, FaMoon, FaSun } from "react-icons/fa";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
@@ -12,13 +12,12 @@ const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
+    document.querySelector("html").setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
-    document.documentElement.classList.remove("light", "dark");
-    document.documentElement.classList.add(theme);
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   const handleLogout = () => {
@@ -61,8 +60,7 @@ const Navbar = () => {
   );
 
   return (
-    
-      <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 shadow-md z-50">
+    <nav className="fixed top-0 left-0 right-0 bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 shadow-md z-50">
       <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
         {/* Logo */}
         <Link
@@ -82,16 +80,16 @@ const Navbar = () => {
 
         {/* Right Section */}
         <div className="flex items-center gap-4">
-          {/* Emoji toggle only */}
-          <span
-            className="text-2xl cursor-pointer"
+          {/* Theme Toggle */}
+          <button
             onClick={toggleTheme}
-            aria-label="Toggle Theme"
+            className="btn btn-ghost btn-sm text-xl tooltip"
+            data-tip={theme === "light" ? "Dark Mode" : "Light Mode"}
           >
-            {theme === "dark" ? "🌙" : "☀️"}
-          </span>
+            {theme === "light" ? <FaMoon /> : <FaSun />}
+          </button>
 
-          {/* User / Login */}
+          {/* User Section */}
           {!user ? (
             <Link
               to="/login"
@@ -137,7 +135,7 @@ const Navbar = () => {
             </div>
           )}
 
-          {/* Mobile Toggle Button */}
+          {/* Mobile Menu Toggle */}
           <button
             className="md:hidden text-2xl ml-2"
             onClick={() => setMobileMenuOpen((prev) => !prev)}
@@ -151,13 +149,21 @@ const Navbar = () => {
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="md:hidden px-4 py-3 flex flex-col gap-2 bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-all duration-300">
-          {/* Emoji in Mobile */}
-          <div
-            className="text-2xl mb-2 cursor-pointer"
-            onClick={toggleTheme}
+          <button
+            className="text-right text-xl font-bold self-end"
+            onClick={() => setMobileMenuOpen(false)}
           >
-            {theme === "dark" ? "🌙" : "☀️"}
-          </div>
+            ✕
+          </button>
+
+          {/* Theme Toggle in Mobile */}
+          <button
+            onClick={toggleTheme}
+            className="btn btn-ghost btn-sm text-xl tooltip"
+            data-tip={theme === "light" ? "Dark Mode" : "Light Mode"}
+          >
+            {theme === "light" ? <FaMoon /> : <FaSun />}
+          </button>
 
           {navLinks}
 

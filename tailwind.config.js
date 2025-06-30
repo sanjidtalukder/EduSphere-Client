@@ -1,4 +1,3 @@
-// tailwind.config.js
 module.exports = {
   darkMode: 'class',
   content: [
@@ -8,5 +7,5 @@ module.exports = {
   theme: {
     extend: {},
   },
-  plugins: [require("daisyui")], // ✅ এটা যোগ করো
-}
+  plugins: [require("daisyui")],
+};

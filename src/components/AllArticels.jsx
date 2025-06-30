@@ -29,7 +29,7 @@ const AllArticels = () => {
 
   useEffect(() => {
     setLoading(true); // Start loading
-    fetch("https://hobbyhub-server-delta.vercel.app/articles")
+    fetch("https://my-edu-sphere-server-ten.vercel.app/articles")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
