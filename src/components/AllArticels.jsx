@@ -39,7 +39,7 @@ const AllArticels = () => {
 
   return (
     <BackgroundWrapper>
-      {/* 🔵 Animated Background */}
+      {/*  Animated Background */}
       <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
         <Lottie animationData={homeBgAnimation} loop />
       </div>
@@ -51,13 +51,13 @@ const AllArticels = () => {
 
         {/* Loading skeleton */}
         {loading ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">
             {Array.from({ length: 6 }).map((_, i) => (
               <SkeletonCard key={i} />
             ))}
           </div>
         ) : articles.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">
             {articles.map((article, index) => (
               <motion.div
                 key={article._id}

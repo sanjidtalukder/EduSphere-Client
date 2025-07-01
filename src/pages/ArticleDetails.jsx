@@ -106,10 +106,10 @@ const ArticleDetails = () => {
             />
           </figure>
           <div className="card-body p-6 sm:p-10">
-            <h2 className="card-title text-2xl sm:text-3xl font-bold mb-3">
+            <h2 className="card-title text-gray-900 text-2xl sm:text-3xl  font-bold mb-3">
               {article?.title}
             </h2>
-            <p className="text-gray-700 leading-relaxed mb-4 whitespace-pre-line">
+            <p className="text-gray-700 leading-relaxed mb-4  whitespace-pre-line">
               {article?.content}
             </p>
 
@@ -135,19 +135,19 @@ const ArticleDetails = () => {
               </div>
             )}
 
-            <div className="card-actions justify-start mb-6">
+            <div className="card-actions text-blue-600 justify-start mb-6">
               <button
                 onClick={handleLike}
                 disabled={liked}
-                className={`btn ${liked ? "btn-secondary" : "btn-outline"}`}
+                className={`btn ${liked ? "btn-secondary text-red-500 bg-blue-600 " : "btn-outline"}`}
               >
-                {liked ? "Liked ❤️" : "Like 🤍"} ({likes})
+                {liked ? "Liked  ❤️" : "Like 🤍"} ({likes})
               </button>
             </div>
 
             {/* Comments Section */}
             <div>
-              <h3 className="text-xl font-semibold mb-4">
+              <h3 className="text-xl font-semibold text-gray-600 mb-4">
                 Comments ({comments.length})
               </h3>
 
@@ -156,15 +156,15 @@ const ArticleDetails = () => {
                   <p className="text-gray-500">No comments yet.</p>
                 )}
                 {comments.map((c) => (
-                  <div key={c._id} className="flex items-start gap-3">
+                  <div key={c._id} className="flex items-start  gap-3">
                     <img
                       src={c.user_photo || "/avatardefault.webp"}
                       alt={c.user_name}
                       className="w-10 h-10 rounded-full object-cover"
                     />
                     <div>
-                      <p className="font-semibold">{c.user_name}</p>
-                      <p className="text-sm">{c.comment}</p>
+                      <p className="font-semibold text-gray-500">{c.user_name}</p>
+                      <p className="text-sm text-black">{c.comment}</p>
                     </div>
                   </div>
                 ))}
