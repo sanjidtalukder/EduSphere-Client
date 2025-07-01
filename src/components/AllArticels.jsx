@@ -4,6 +4,7 @@ import BackgroundWrapper from "./BackgroundWrapper";
 import Lottie from "lottie-react";
 import homeBgAnimation from "../assets/home-bg-lottie.json";
 import { motion } from "framer-motion";
+import { FaSearch } from "react-icons/fa"; // 🔍 Icon
 
 const SkeletonCard = () => {
   return (
@@ -26,20 +27,41 @@ const SkeletonCard = () => {
 const AllArticels = () => {
   const [articles, setArticles] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortOption, setSortOption] = useState("newest");
+  // const [appliedQuery, setAppliedQuery] = useState(""); // 👇 When button is clicked
 
   useEffect(() => {
-    setLoading(true); // Start loading
+    setLoading(true);
     fetch("https://my-edu-sphere-server-ten.vercel.app/articles")
       .then((res) => res.json())
       .then((data) => {
         setArticles(data);
-        setLoading(false); // Stop loading after data is fetched
+        setLoading(false);
       });
   }, []);
 
+  const handleSearchClick = () => {
+    // setAppliedQuery(searchQuery);
+  };
+
+  const filteredAndSortedArticles = articles
+  .filter((article) =>
+    article.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    article.content.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+  .sort((a, b) => {
+    if (sortOption === "newest") return new Date(b.date) - new Date(a.date);
+    if (sortOption === "oldest") return new Date(a.date) - new Date(b.date);
+    if (sortOption === "az") return a.title.localeCompare(b.title);
+    if (sortOption === "za") return b.title.localeCompare(a.title);
+    return 0;
+  });
+
+
   return (
     <BackgroundWrapper>
-      {/*  Animated Background */}
+      {/* Animated Background */}
       <div className="fixed top-0 left-0 w-full h-full -z-10 opacity-25 pointer-events-none">
         <Lottie animationData={homeBgAnimation} loop />
       </div>
@@ -49,16 +71,51 @@ const AllArticels = () => {
           📚 Explore All Articles
         </h2>
 
-        {/* Loading skeleton */}
+        {/* 🔍 Search + Sort */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-8 gap-4">
+          {/* Search Bar */}
+          <div className="w-full sm:w-1/2 flex rounded-full overflow-hidden border border-blue-200 focus-within:ring-2 focus-within:ring-blue-500">
+            <input
+              type="text"
+              placeholder="Search articles..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") handleSearchClick();
+              }}
+              className="flex-1 px-4 py-2 focus:outline-none"
+            />
+            <button
+              onClick={handleSearchClick}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-4 flex items-center justify-center"
+            >
+              <FaSearch className="text-sm" />
+            </button>
+          </div>
+
+          {/* Sort Dropdown */}
+          <select
+            value={sortOption}
+            onChange={(e) => setSortOption(e.target.value)}
+            className="px-4 py-2 border border-blue-200 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="az">Title A-Z</option>
+            <option value="za">Title Z-A</option>
+          </select>
+        </div>
+
+        {/* Article List */}
         {loading ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">
             {Array.from({ length: 6 }).map((_, i) => (
               <SkeletonCard key={i} />
             ))}
           </div>
-        ) : articles.length > 0 ? (
+        ) : filteredAndSortedArticles.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-8">
-            {articles.map((article, index) => (
+            {filteredAndSortedArticles.map((article, index) => (
               <motion.div
                 key={article._id}
                 initial={{ opacity: 0, y: 30 }}
