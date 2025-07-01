@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { FaMedal } from "react-icons/fa";
 
 const TopContributors = () => {
   const [contributors, setContributors] = useState([]);
@@ -15,9 +16,11 @@ const TopContributors = () => {
 
   return (
     <section className="my-12 px-4 sm:px-6 lg:px-10">
-      <h2 className="text-2xl sm:text-3xl font-bold mb-8 text-center text-indigo-700">
-        🏆 Top Contributors
-      </h2>
+      <h2 className="text-2xl font-bold mb-6 text-blue-900 text-center flex items-center justify-center gap-2">
+  <FaMedal className="text-yellow-600" />
+  Top Contributors
+</h2>
+
 
       {contributors.length === 0 ? (
         <p className="text-center text-gray-500">No contributors found.</p>
