@@ -41,7 +41,7 @@ const PostArticles = () => {
       author_photo: user?.photoURL,
       thumbnail:
         formData.thumbnail.trim() === ""
-          ? "/public/educational.png"
+          ? "/educational.png"
           : formData.thumbnail,
     };
 
@@ -96,7 +96,7 @@ const PostArticles = () => {
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition resize-none"
           />
 
-          {/* ✅ Category Select + Optional Input */}
+          {/*  Category Select + Optional Input */}
           <div>
             <label className="block mb-1 font-medium text-gray-700">Category</label>
             <select
@@ -148,7 +148,7 @@ const PostArticles = () => {
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
           />
 
-          {/* ✅ Thumbnail */}
+          {/*  Thumbnail */}
           <input
             type="text"
             name="thumbnail"
@@ -159,7 +159,7 @@ const PostArticles = () => {
               if (formData.thumbnail.trim() === "") {
                 setFormData((prev) => ({
                   ...prev,
-                  thumbnail: "/public/educational.png",
+                  thumbnail: "/educational.png",
                 }));
               }
             }}

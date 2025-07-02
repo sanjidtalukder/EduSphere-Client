@@ -124,6 +124,16 @@ const Navbar = () => {
                   >
                     Post Article
                   </NavLink>
+
+
+                  <NavLink
+                      to="/dashboard"
+                       className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      onClick={() => setDropdownOpen(false)}
+                      >
+                     Dashboard
+                  </NavLink>
+
                   <button
                     onClick={handleLogout}
                     className="block w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"

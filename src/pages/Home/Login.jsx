@@ -40,7 +40,7 @@ const Login = () => {
       setShowSuccessAnim(true);
       setTimeout(() => {
         setShowSuccessAnim(false);
-        navigate("/home");
+        navigate("/");
       }, 2500);
     } catch (error) {
       toast.error("Google login failed.");
@@ -120,7 +120,7 @@ const Login = () => {
       {showSuccessAnim && (
         <div className="fixed inset-0 bg-black bg-opacity-40 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="w-[260px] sm:w-[320px] bg-white rounded-2xl shadow-lg p-2">
-            <Lottie animationData={loginSuccessAnimation} loop={false} />
+            <Lottie to="/" animationData={loginSuccessAnimation} loop={false} />
           </div>
         </div>
       )}

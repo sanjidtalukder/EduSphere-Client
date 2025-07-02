@@ -13,6 +13,15 @@ import ContactUs from "../components/ContactUs";
 import AllArticels from "../components/AllArticels";
 import MyArticles from "../components/MyArticels";
 import PrivateRoute from "./PrivateRoute"; 
+import DashboardLayout from "../layout/DashboardLayout";
+import DashboardHome from "../pages/Dashboard/DashboardHome";
+// import ManageUsers from "../pages/Dashboard/ManageUsers";
+import Settings from "../pages/Dashboard/Settings";
+import ManageUsers from "../pages/Dashboard/ManagUser";
+import MyArticel from "../pages/Dashboard/MyArticel";
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -61,6 +70,21 @@ const router = createBrowserRouter([
       { path: "*", element: <NotFound /> },
     ],
   },
+  {
+  path: "/dashboard",
+  element: (
+    <PrivateRoute>
+      <DashboardLayout />
+    </PrivateRoute>
+  ),
+  children: [
+    { path: "", element: <DashboardHome /> },
+    { path: "manage-users", element: <ManageUsers /> },
+    { path: "settings", element: <Settings /> },
+    { path: "my-articles", element: <MyArticel /> },
+  ],
+},
+
 ]);
 
 export default router;
